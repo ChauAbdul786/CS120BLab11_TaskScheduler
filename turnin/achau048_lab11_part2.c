@@ -149,7 +149,7 @@ int TickFct_LCD(int state) {
     case LCD_Start:  
         break;
     case LCD_Idle:   
-        for (int k = 0; k < 16; ++k) {
+        for (int k = 0; k < 16; k++) {
             lcdScreen[k] = text[(k + currPosition) % 52];
         }
 
@@ -194,7 +194,7 @@ int main(void) {
     unsigned char i;
     while (1) {
         for (i = 0; i < numTasks; i++) {
-            if (tasks[i]->elapsedTime == tasks[i]->period) {
+            if (tasks[i]->elapsedTime >= tasks[i]->period) {
                 tasks[i]->state = tasks[i]->TickFct(tasks[i]->state);
                 tasks[i]->elapsedTime = 0;
             }
